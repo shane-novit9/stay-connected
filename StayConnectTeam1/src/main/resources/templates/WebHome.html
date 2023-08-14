@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="en"  xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>STAYCONNECTED</title>
+    <link
+      rel="stylesheet"
+      href="https://use.fontawesome.com/releases/v5.15.3/css/all.css"
+      integrity="sha384-SZXxX4whJ79/gErwcOYf+zWLeJdY/qpuqC4cAa9rOGUstPomtqpuNWT9wdPEn2fk"
+      crossorigin="anonymous"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Kumbh+Sans:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+    <style type="text/css">
+	      * {
+	  box-sizing: border-box;
+	  margin: 0;
+	  padding: 0;
+	  font-family: "Kumbh Sans", sans-serif;
+	}
+	
+	.navbar {
+	  background: #131313;
+	  height: 80px;
+	  display: flex;
+	  justify-content: center;
+	  align-items: center;
+	  font-size: 1.2rem;
+	  position: sticky;
+	  top: 0; 
+	  z-index: 999;
+	  text-decoration: none;
+	}
+	
+	.navbar__container {
+	  display: flex;
+	  justify-content: space-between;
+	  height: 80px;
+	  z-index: 1;
+	  width: 100%;
+	  max-width: 1300px;
+	  margin: 0 auto;
+	  padding: 0;
+	}
+	
+	#navbar__logo {
+	  background-color: #ff8177;
+	  background-image: linear-gradient(to top, #ff0844 0%, #ffb199 100%);
+	  background-size: 100%;
+	  -webkit-background-clip: text;
+	  -moz-background-clip: text;
+	  -webkit-text-fill-color: transparent;
+	  -moz-text-fill-color: transparent;
+	  display: flex;
+	  align-items: center;
+	  cursor: pointer;
+	  text-decoration: none;
+	  font-size: 2rem;
+	}
+	
+	.fa-gem {
+	  margin-right: 0.5rem;
+	}
+	
+	.navbar__menu {
+	  display: flex;
+	  align-items: center;
+	  list-style: none;
+	  text-align: center;
+	}
+	
+	.navbar__item {
+	  height: 80px;
+	}
+	
+	.navbar__links {
+	  color: #fff;
+	  display: flex;
+	  align-items: center;
+	  justify-content: center;
+	  text-decoration: none;
+	  padding: 0 1rem;
+	  height: 100%;
+	}
+	
+	.navabar__btn {
+	  display: flex;
+	  justify-content: center;
+	  align-items: center;
+	  padding: 0 1rem;
+	  width: 100%;
+	}
+	
+	.button {
+	  display: flex;
+	  justify-content: center;
+	  align-items: center;
+	  text-decoration: none;
+	  padding: 10px 20px;
+	  height: 100%;
+	  width: 100%;
+	  border: none;
+	  outline: none;
+	  border-radius: 4px;
+	  background-color: #ff8177;
+	  color: #fff;
+	}
+	
+	.button:hover {
+	  background: #dda0dd;
+	  transition: all 0.3s ease;
+	}
+	
+	.navbar__links:hover {
+	  color: #ffb199;
+	  transition: all 0.3s ease;
+	}
+	
+	@media screen and (max-width: 960px) {
+	  .navbar__container {
+	    display: flex;
+	    justify-content: space-between;
+	    height: 80px;
+	    z-index: 1;
+	    width: 100%;
+	    max-width: 1300px;
+	    padding: 0;
+	  }
+	
+	  .navbar__menu {
+	    display: grid;
+	    grid-template-columns: auto;
+	    margin: 0;
+	    width: 100%;
+	    position: absolute;
+	    top: 80px;
+	    opacity: 0;
+	    transition: all 0.7s ease;
+	    height: 50vh;
+	    z-index: -1;
+	    background: #0e1111;
+	  }
+	
+	  .navbar__menu.active {
+	    background: #0e1111;
+	    top: 100%;
+	    opacity: 1;
+	    transition: all 0.7s ease;
+	    z-index: 99;
+	    height: 50vh;
+	    font-size: 1.6rem;
+	  }
+	
+	  #navbar__logo {
+	    padding-left: 25px;
+	  }
+	
+	  .navbar__toggle .bar {
+	    width: 25px;
+	    height: 3px;
+	    margin: 5px auto;
+	    transition: all 0.3s ease-in-out;
+	    background: #fff;
+	  }
+	
+	  .navbar__item {
+	    width: 100%;
+	  }
+	
+	  .navbar__links {
+	    text-align: center;
+	    padding: 2rem;
+	    width: 100%;
+	    display: table;
+	  }
+	
+	  #mobile-menu {
+	    position: absolute;
+	    top: 1%;
+	    right: 0%;
+	    transform: translate(5%, 20%);
+	  }
+	
+	  .bar {
+	    display: block;
+	  }
+	
+	  .navabar__btn {
+	    padding-bottom: 2rem;
+	  }
+	
+	  .button {
+	    display: flex;
+	    justify-content: center;
+	    align-items: center;
+	    margin-left: auto;
+	    margin-right: auto;
+	    width: 85%;
+	    height: 80px;
+	  }
+	
+	  .navabar__toggle .bar {
+	    height: 4px;
+	    background-color: white;
+	    margin: 5px 0;
+	    border-radius: 25px;
+	  }
+	  .navabar__toggle {
+	    width: 30px;
+	    display: block;
+	    margin: 1rem;
+	  }
+	
+	  #mobile-menu.is-active .bar:nth-child(2) {
+	    opacity: 0;
+	  }
+	  #mobile-menu.is-active .bar:nth-child(1) {
+	    transform: translateY(8px) rotate(45deg);
+	  }
+	  #mobile-menu.is-active .bar:nth-child(3) {
+	    transform: translateY(-8px) rotate(-45deg);
+	  }
+	}
+	
+	/* Hero Section CSS*/
+	.main {
+	  background-color: #141414;
+	}
+	
+	.main__container {
+	  display: grid;
+	  grid-template-columns: 1fr 1fr;
+	  align-items: center;
+	  justify-self: center;
+	  margin: 0 auto;
+	  height: 90vh;
+	  background-color: #141414;
+	  z-index: 1;
+	  width: 100%;
+	  max-width: 1300px;
+	  padding: 0 50px;
+	}
+	
+	.main__container h1 {
+	  font-size: 4rem;
+	  background-color: #ff8177;
+	  background-image: linear-gradient(to top, #ff0844 0%, #ffb199 100%);
+	  background-size: 100%;
+	  -webkit-background-clip: text;
+	  -moz-background-clip: text;
+	  -webkit-text-fill-color: transparent;
+	  -moz-text-fill-color: transparent;
+	}
+	
+	.main__content h2 {
+	  font-size: 4rem;
+	  background-color: #ff8177;
+	  background-image: linear-gradient(to top, #b721ff 0%, #21d4fd 100%);
+	  background-size: 100%;
+	  -webkit-background-clip: text;
+	  -moz-background-clip: text;
+	  -webkit-text-fill-color: transparent;
+	  -moz-text-fill-color: transparent;
+	}
+	
+	.main__content p {
+	  margin-top: 1rem;
+	  font-size: 2rem;
+	  font-weight: 700;
+	  color: #fff;
+	}
+	
+	.main__btn {
+	  font-size: 1rem;
+	  background-image: linear-gradient(to top, #f77062 0%, #fe5196 100%);
+	  padding: 14px 32px;
+	  border: none;
+	  border-radius: 4px;
+	  color: #fff;
+	  margin-top: 2rem;
+	  cursor: pointer;
+	  position: relative;
+	  transition: all 0.35;
+	  outline: none;
+	}
+	
+	.main__btn a {
+	  position: relative;
+	  z-index: 2;
+	  color: #fff;
+	  text-decoration: none;
+	}
+	
+	.main__btn:after {
+	  position: absolute;
+	  content: "";
+	  top: 0;
+	  left: 0;
+	  width: 0;
+	  height: 100%;
+	  background: #4837ff;
+	  transition: all 0.35s;
+	  border-radius: 4px;
+	}
+	
+	.main__btn:after {
+	  color: #fff;
+	}
+	.main__btn:hover:after {
+	  width: 100%;
+	}
+	.main__img--container {
+	  text-align: center;
+	}
+	
+	#main__img {
+	  height: 100%;
+	  width: 100%;
+	}
+	
+	@media screen and (max-width: 768px) {
+	  .main__container {
+	    display: grid;
+	    grid-template-columns: auto;
+	    align-items: center;
+	    justify-self: center;
+	    width: 100%;
+	    margin: 0 auto;
+	    height: 90vh;
+	  }
+	}
+    
+    </style>
+  </head>
+  <body>
+    <nav class="navbar">
+      <div class="navbar__container">
+        <a href="" id="navbar__logo"
+          ><i class="fab fa-jedi-order"></i>STAYCONNECTED</a 
+        >
+        <div class="navabar__toggle" id="mobile-menu">  
+          <span class="bar"></span>
+          <span class="bar"></span>
+          <span class="bar"></span>
+        </div>
+        <ul class="navbar__menu">
+          <li class="navbar__btn">
+            <a href="Registration.html" th:href="@{/registration}" class="button"> Sign Up </a>
+          </li>
+        </ul>
+      </div>
+    </nav>
+    <!-- Hero Section -->
+    <div class="main">
+      <div class="main__container">
+        <div class="main__content">
+          <h1>Welcome to your professional community</h1>
+          <h2>Find the right job or internship for you</h2>
+          <p>Post your job for millions of people to see</p>
+				<a  href="WebHome.html" th:href="@{/login}" >
+					<button class="main__btn" type="submit">LOGIN</button>	
+				</a>
+        </div>
+      </div>
+    </div>
+    <script>
+    const menu = document.querySelector("#mobile-menu");
+    const menuLinks = document.querySelector(".navbar__menu");
+
+    menu.addEventListener("click", function () {
+      menu.classList.toggle("is-active");
+      menuLinks.classList.toggle("active");
+    });
+    </script>
+  </body>
+</html>

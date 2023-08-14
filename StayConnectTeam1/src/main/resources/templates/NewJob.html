@@ -1,0 +1,141 @@
+<!DOCTYPE HTML>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<head>
+<title>Francis Tholley</title>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous"/>
+<style>
+     body{
+	       	/* fallback for old browsers */
+		background: #f093fb;
+		
+		/* Chrome 10-25, Safari 5.1-6 */
+		background: -webkit-linear-gradient(to bottom right, rgba(240, 147, 251, 1), rgba(245, 87, 108, 1));
+		
+		/* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+		background: linear-gradient(to bottom right, rgba(240, 147, 251, 1), rgba(245, 87, 108, 1))
+     }
+     .body{
+		min-height: 100vh;
+	    max-width: 1028px;
+	    background-color: papayawhip;
+	    margin: 0 auto;
+	}
+	
+	.body-white{
+		background-color: #fff;
+	}
+</style>
+</head>
+<body class="vh-100 body">
+	<nav class="navbar navbar-dark bg-dark">
+	 <div class="container-fluid">
+	 	<div>
+		 	<a class="navbar-brand nav-link" th:href="@{/}">Home <span class="sr-only">(current)</span></a>
+	 	</div>
+	 	
+	 	<form class="d-flex" th:action="@{/logout}" method="post">
+	       <button class="float-right btn btn-primary btn-lg font-weight-bold" type="submit">Log Out</button>
+	    </form>
+	 </div>
+	</nav>
+	<div class="col h-100 body-white">
+		<form id="Form2" action="#" th:action="@{/add/job}" th:object="${job}" method="post">
+			  <div class="form-group">
+			    <label for="Jobtitle" >Job Title</label>
+			    <input type="text"  name="input_Form1_n1" th:field="*{title}" class="form-control" placeholder="Job Title" >
+			  	<div th:if="${#fields.hasErrors('title')}" th:errors="*{title}"></div>
+			  </div>
+			  <div class="form-group">
+			    <label for="Jobtype">Job Type</label>
+			    <input type="text"  th:field="*{type}" class="form-control" id="jobtype" placeholder="Job Type">
+			  	<div th:if="${#fields.hasErrors('type')}" th:errors="*{type}"></div>
+			  </div>
+			  <div class="form-group">
+			    <label for="Jobtype">Company Name</label>
+			    <input type="text"  th:field="*{companyName}" class="form-control" id="jobtype" placeholder="Company Name">
+			   	<div th:if="${#fields.hasErrors('companyName')}" th:errors="*{companyName}"></div>
+			  </div>
+			  <div class="form-group">
+			    <label for="job description">Job Description:</label>
+			    <textarea  th:field="*{description}" class="form-control" rows="5" id="job description"></textarea>
+	         	<div th:if="${#fields.hasErrors('description')}" th:errors="*{description}"></div>
+			 </div>
+			   <label for="Jobtype">Technical Skills</label>
+			  <div class="form-group">
+			    <input type="text" th:field="*{skill1}" class="form-control" placeholder="Skill1">
+			  	<div th:if="${#fields.hasErrors('skill1')}" th:errors="*{skill1}"></div>
+			  </div>
+			  <div class="form-group">
+			    <input type="text"  th:field="*{skill2}" class="form-control"  placeholder="Skill2">
+			  </div>
+			  <div class="form-group">
+			    <input type="text" th:field="*{skill3}" class="form-control" placeholder="Skill3">
+			  </div>
+			  <div class="form-group">
+			    <input type="text"  th:field="*{skill4}" class="form-control"  placeholder="Skill4">
+			  </div>
+			  <div class="form-group">
+			    <input type="text"  th:field="*{skill5}" class="form-control"  placeholder="Skill5">
+			  </div>
+	          <label for="inputZip">Add Locations</label>
+			  <div class="form-row">
+			    <div class="form-group col-md-6">
+			      <label for="inputCity" >City1</label>
+			      <input type="text" th:field="*{city1}" class="form-control" placeholder="City1">
+			      <div th:if="${#fields.hasErrors('city1')}" th:errors="*{city1}"></div>
+			    </div>
+			    <div class="form-group col-md-4">
+			      <label for="inputState">State1</label>
+			      <input type="text" th:field="*{state1}" class="form-control"  placeholder="State1">
+			      <div th:if="${#fields.hasErrors('state1')}" th:errors="*{state1}"></div>
+			    </div>
+			    <div class="form-group col-md-2">
+			      <label for="inputZip">Zip1</label>
+			      <input type="text" th:field="*{zipcode1}" class="form-control" placeholder="ZipCode1">
+			     <div th:if="${#fields.hasErrors('zipcode1')}" th:errors="*{zipcode1}"></div>
+			    </div>
+			    <div class="form-group col-md-6">
+			      <label for="inputCity" >City2</label>
+			      <input type="text" th:field="*{city2}" class="form-control" placeholder="City2">
+			    </div>
+			    <div class="form-group col-md-4">
+			      <label for="inputState">State2</label>
+			      <input type="text" th:field="*{state2}" class="form-control"  placeholder="State2">
+			    </div>
+			    <div class="form-group col-md-2">
+			      <label for="inputZip">Zip2</label>
+			      <input type="text" th:field="*{zipcode2}" class="form-control" placeholder="ZipCode2">
+			    </div>
+			    <div class="form-group col-md-6">
+			      <label for="inputCity" >City3</label>
+			      <input type="text" th:field="*{city3}" class="form-control" placeholder="City3">
+			    </div>
+			    <div class="form-group col-md-4">
+			      <label for="inputState">State3</label>
+			      <input type="text" th:field="*{state3}" class="form-control"  placeholder="State3">
+			    </div>
+			    <div class="form-group col-md-2">
+			      <label for="inputZip">Zip3</label>
+			      <input type="text" th:field="*{zipcode3}" class="form-control" placeholder="ZipCode3">
+			    </div>
+		    	<div class="form-group col-md-6">
+			      <label for="inputCity" >City4</label>
+			      <input type="text" th:field="*{city4}" class="form-control" placeholder="City4">
+			    </div>
+			    <div class="form-group col-md-4">
+			      <label for="inputState">State4</label>
+			      <input type="text" th:field="*{state4}" class="form-control"  placeholder="State4">
+			    </div>
+			    <div class="form-group col-md-2">
+			      <label for="inputZip">Zip4</label>
+			      <input type="text" th:field="*{zipcode4}" class="form-control" placeholder="ZipCode4">
+			    </div>		    
+		  </div>
+		  <button type="submit" class="btn btn-primary">Create Job</button>
+		</form>
+		<a href="home.html" th:href="@{/}">Back to Home Page</a>
+	</div>
+</body>
+</html>

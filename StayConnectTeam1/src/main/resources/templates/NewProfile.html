@@ -1,0 +1,133 @@
+<!DOCTYPE HTML>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<head>
+<title>Francis Tholley</title>
+<link rel="stylesheet"
+ href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+ integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
+ crossorigin="anonymous"/>
+<style>
+     body{
+	       	/* fallback for old browsers */
+		background: #f093fb;
+		
+		/* Chrome 10-25, Safari 5.1-6 */
+		background: -webkit-linear-gradient(to bottom right, rgba(240, 147, 251, 1), rgba(245, 87, 108, 1));
+		
+		/* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+		background: linear-gradient(to bottom right, rgba(240, 147, 251, 1), rgba(245, 87, 108, 1))
+     }
+     .body{
+		min-height: 100vh;
+	    max-width: 1028px;
+	    background-color: papayawhip;
+	    margin: 0 auto;
+	}
+	
+	.body-white{
+		background-color: #fff;
+	}
+	.coltxt{
+		color:#fff;
+	}
+</style>
+</head>
+<body class="body" style="background-color:#33475b;color:#fff">
+    <nav style="background-color:#33475b;" class="navbar">
+		 <div class="container-fluid">
+		 	<div>
+			 	<a class="navbar-brand nav-link font-weight-bold coltxt" th:href="@{/}">Home <span class="sr-only">(current)</span></a>
+		 	</div>
+		 	<form class="d-flex" th:action="@{/logout}" method="post">
+		       <button class="float-right btn btn-primary btn-lg font-weight-bold" type="submit">Log Out</button>
+		    </form>
+		 </div>
+		</nav>
+	<div class="col h-100 body-white">
+		<form id="Form2" action="#" th:action="@{/add/profile}" th:object="${profile}" method="post">
+			 <div class="form-row">
+				    <div class="form-group col-md-6">
+				      <label for="firstName" >FirstName</label>
+				      <input type="text" th:field="*{firstName}" class="form-control" placeholder="FirstName">
+				    </div>
+				    <div class="form-group col-md-6">
+				      <label for="lastName">LastName</label>
+				      <input type="text" th:field="*{lastName}" class="form-control"  placeholder="LastName">
+				    </div>	    
+			  </div>
+			  <div class="form-group">
+			    <label for="job description">Bio:</label>
+			    <textarea  th:field="*{biography}" class="form-control" rows="5" placeholder="Bio"></textarea>
+			 </div>
+			   <label for="Jobtype">Job Titles</label>
+			  <div class="form-group">
+			    <input type="text" th:field="*{jobtitle1}" class="form-control" placeholder="Job Title 1">
+			  </div>
+			  <div class="form-group">
+			    <input type="text"  th:field="*{jobtitle2}" class="form-control"  placeholder="Job Title 2">
+			  </div>
+			  <div class="form-group">
+			    <input type="text" th:field="*{jobtitle3}" class="form-control" placeholder="Job Title 3">
+			  </div>
+			  <label for="Jobtype">Phone Numbers</label>
+			  <div class="form-group">
+			    <input type="text" th:field="*{phone1}" class="form-control" placeholder="Phone Number 1">
+			  </div>
+			  <div class="form-group">
+			    <input type="text"  th:field="*{phone2}" class="form-control"  placeholder="Phone Number 2">
+			  </div>
+			  <div class="form-group">
+			    <input type="text" th:field="*{phone3}" class="form-control" placeholder="Phone Number 3">
+			  </div>
+	          <div class="form-row">
+			    <div class="form-group col-md-6">
+			      <label for="inputCity" >City1</label>
+			      <input type="text" th:field="*{city1}" class="form-control" placeholder="City1">
+			    </div>
+			    <div class="form-group col-md-4">
+			      <label for="inputState">State1</label>
+			      <input type="text" th:field="*{state1}" class="form-control"  placeholder="State1">
+			    </div>
+			    <div class="form-group col-md-2">
+			      <label for="inputZip">Zip1</label>
+			      <input type="text" th:field="*{zipcode1}" class="form-control" placeholder="ZipCode1">
+			    </div>	
+			    <div  sec:authorize="hasRole ('STUDENT')" class="form-group col-md-2">
+			      <label for="gradyear">Graduation Year</label>
+			      <input type="text" th:field="*{graduationYear}" class="form-control" placeholder="Graduation Year">
+			    </div>	  
+			    <div  sec:authorize="hasRole ('FACULTY')" class="form-group col-md-2">
+			      <label for="gradyear">Office Number</label>
+			      <input type="text" th:field="*{officeNum}" class="form-control" placeholder="Office Number">
+			    </div>	 
+			    <div  sec:authorize="hasAnyRole('ALUMNI','FACULTY')" class="form-group col-md-2">
+			      <label for="gradyear">Company Name</label>
+			      <input type="text" th:field="*{company_name}" class="form-control" placeholder="Company Name">
+			    </div>	 
+		  	</div>
+			  <div sec:authorize="hasAnyRole('ROLE_STUDENT','ROLE_ALUMNI')">
+			  	 <label for="Jobtype">Technical Skills</label>
+				  <div class="form-group">
+				    <input type="text" th:field="*{skill1}" class="form-control" placeholder="Skill1">
+				  </div>
+				  <div class="form-group">
+				    <input type="text"  th:field="*{skill2}" class="form-control"  placeholder="Skill2">
+				  </div>
+				  <div class="form-group">
+				    <input type="text" th:field="*{skill3}" class="form-control" placeholder="Skill3">
+				  </div>
+				  <div class="form-group">
+				    <input type="text"  th:field="*{skill4}" class="form-control"  placeholder="Skill4">
+				  </div>
+				  <div class="form-group">
+				    <input type="text"  th:field="*{skill5}" class="form-control"  placeholder="Skill5">
+				  </div>
+			  </div>			  
+		  <button type="submit" class="btn btn-primary">Update Profile</button>
+		</form>
+		<a href="home.html" th:href="@{/view/profile}">Back to View Profile Page</a>
+	</div>
+</body>
+</html>

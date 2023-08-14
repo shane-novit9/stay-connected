@@ -1,0 +1,134 @@
+<!DOCTYPE HTML>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<head>
+<title>Job Search</title>
+<link rel="stylesheet"
+ href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+ integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
+ crossorigin="anonymous">
+<style>
+     body{
+	       	/* fallback for old browsers */
+		background: #f093fb;
+		
+		/* Chrome 10-25, Safari 5.1-6 */
+		background: -webkit-linear-gradient(to bottom right, rgba(240, 147, 251, 1), rgba(245, 87, 108, 1));
+		
+		/* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+		background: linear-gradient(to bottom right, rgba(240, 147, 251, 1), rgba(245, 87, 108, 1))
+     }
+     .body{
+		min-height: 100vh;
+	    max-width: 1028px;
+	    background-color: papayawhip;
+	    margin: 0 auto;
+	}
+	
+	.body-white{
+		background-color: #fff;
+	}
+</style>
+</head>
+<body class="body" >
+	<nav class="navbar navbar-light bg-light">
+	  <div>
+	 	<a class="navbar-brand nav-link font-weight-bold " th:href="@{/}">Home <span class="sr-only">(current)</span></a>
+	  </div>
+	  <div>
+	    <h4 style="text-align: center">Enter your preferred search method</h4>
+	    <form class="form-search" id="Form3" action="#" th:action="@{/search/jobs}" th:object="${searchMethod}" method="post">
+	      <div class="form-row">
+	        <div class="form-group col-md-6">
+			  <label for="email" >Email</label>
+			  <input type="text" th:field="*{email}" class="form-control" placeholder="Email">
+			</div>
+			<div class="form-group col-md-3">
+			  <label for="firstName" >Title</label>
+			  <input type="text" th:field="*{title}" class="form-control" placeholder="title">
+			</div>
+			<div class="form-group col-md-3">
+			  <label for="type">Type</label>
+			  <input type="text" th:field="*{type}" class="form-control"  placeholder="Type">
+			</div>	
+			<div class="form-group col-md-2">
+			  <label for="city" >City</label>
+			  <input type="text" th:field="*{city}" class="form-control" placeholder="City">
+			</div>
+			<div class="form-group col-md-3">
+			  <label for="state" >State</label>
+			  <input type="text" th:field="*{state}" class="form-control" placeholder="State">
+			</div>
+			<div class="form-group col-md-2">
+			  <label for="zip" >Zip</label>
+			  <input type="text" th:field="*{zip}" class="form-control" placeholder="Zip">
+			</div>
+			<div class="form-group col-md-5">
+			  <label for="companyName" >Company Name</label>
+			  <input type="text" th:field="*{companyName}" class="form-control" placeholder="Company Name">
+			</div>
+			<!-- <div class="form-group col-md-6">
+			  <label for="graduationDate">Graduation Date</label>
+			  <input type="text" th:field="*{graduationDate}" class="form-control" placeholder="Graduation Date">
+			</div> -->
+		  </div>
+		  <div class="form-row">
+			<button type="submit" class="btn btn-primary">Search</button>   		    
+		  </div>
+	    </form>
+	  </div>
+	</nav>
+    <h2 class="text-center" style="color:#FFFFFF">Some Jobs</h2>
+<table class="table body-white">
+		  <thead class="thead-dark">
+		    <tr>
+		      <th scope="col">Job Title</th>
+		      <th scope="col">Job Type</th>
+		      <th scope="col">Company Name</th>
+		      <th scope="col">Job Cities</th>
+		      <th scope="col">Job States</th>
+		      <th scope="col">Job ZipCodes</th>
+		      <th scope="col"></th>
+		    </tr>
+		  </thead>
+		  <tbody>
+		    <tr th:each="job : ${jobs}">
+
+		          <th th:text="${job.title}" scope="row"></th>
+			      <td th:text="${job.type}"></td>
+			      <td th:text="${job.companyName}"></td>
+			      <td>
+					<ul>
+		    			<li class="list-unstyled" th:text="${job.city1}" ></li>
+		    			<li class="list-unstyled" th:text="${job.city2}" ></li>
+		    			<li class="list-unstyled" th:text="${job.city3}" ></li>
+		    			<li class="list-unstyled" th:text="${job.city4}" ></li>
+		    		</ul>	      
+			      </td>
+			      <td>
+					<ul>
+		    			<li class="list-unstyled" th:text="${job.state1}" ></li>
+		    			<li class="list-unstyled" th:text="${job.state2}" ></li>
+		    			<li class="list-unstyled" th:text="${job.state3}" ></li>
+		    			<li class="list-unstyled" th:text="${job.state4}" ></li>
+		    		</ul>	      
+			      </td>
+			      <td>
+					<ul>
+		    			<li class="list-unstyled" th:text="${job.zipcode1}" ></li>
+		    			<li class="list-unstyled" th:text="${job.zipcode2}" ></li>
+		    			<li class="list-unstyled" th:text="${job.zipcode3}" ></li>
+		    			<li class="list-unstyled" th:text="${job.zipcode4}" ></li>
+		    		</ul>	      
+			      </td>
+				      <td class="btn">
+						  <a href="customer.html" th:href="@{'/view/searched/JobDetails?id=' + ${job.id}}" class="list-group-item list-group-item-action btn">
+						  	<button class="btn btn-primary" type="submit"> View Job Details</button>
+						  </a>      
+			     </td>	
+		    </tr>
+		  </tbody>
+	</table>
+</body>
+</html>

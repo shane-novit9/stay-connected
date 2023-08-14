@@ -1,0 +1,291 @@
+<!DOCTYPE HTML>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<head>
+<title>Francis Tholley</title>
+<link rel="stylesheet"
+ href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+ integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
+ crossorigin="anonymous">
+<style>
+     body{
+	       	/* fallback for old browsers */
+		background: #f093fb;
+		
+		/* Chrome 10-25, Safari 5.1-6 */
+		background: -webkit-linear-gradient(to bottom right, rgba(240, 147, 251, 1), rgba(245, 87, 108, 1));
+		
+		/* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+		background: linear-gradient(to bottom right, rgba(240, 147, 251, 1), rgba(245, 87, 108, 1));
+		margin-top:20px;
+     }
+     
+     .body{
+		min-height: 100vh;
+	    max-width: 1028px;
+	    background-color: papayawhip;
+	    margin: 0 auto;
+	}
+	
+	.body-white{
+		background-color: #fff;
+	}
+
+	.card-style1 {
+	    box-shadow: 0px 0px 10px 0px rgb(89 75 128 / 9%);
+	}
+	.border-0 {
+	    border: 0!important;
+	}
+	.card {
+	    position: relative;
+	    display: flex;
+	    flex-direction: column;
+	    min-width: 0;
+	    word-wrap: break-word;
+	    background-color: #fff;
+	    background-clip: border-box;
+	    border: 1px solid rgba(0,0,0,.125);
+	    border-radius: 0.25rem;
+	}
+	
+	section {
+	    padding: 120px 0;
+	    overflow: hidden;
+	    background: #fff;
+	}
+	.mb-2-3, .my-2-3 {
+	    margin-bottom: 2.3rem;
+	}
+	
+	.section-title {
+	    font-weight: 600;
+	    letter-spacing: 2px;
+	    text-transform: uppercase;
+	    margin-bottom: 10px;
+	    position: relative;
+	    display: inline-block;
+	}
+	.text-primary {
+	    color: #ceaa4d !important;
+	}
+	.text-secondary {
+	    color: #15395A !important;
+	}
+	.font-weight-600 {
+	    font-weight: 600;
+	}
+	.display-26 {
+	    font-size: 1.3rem;
+	}
+	
+	@media screen and (min-width: 992px){
+	    .p-lg-7 {
+	        padding: 4rem;
+	    }
+	}
+	@media screen and (min-width: 768px){
+	    .p-md-6 {
+	        padding: 3.5rem;
+	    }
+	}
+	@media screen and (min-width: 576px){
+	    .p-sm-2-3 {
+	        padding: 2.3rem;
+	    }
+	}
+	.p-1-9 {
+	    padding: 1.9rem;
+	}
+	
+	.bg-secondary {
+	    background: #15395A !important;
+	}
+	@media screen and (min-width: 576px){
+	    .pe-sm-6, .px-sm-6 {
+	        padding-right: 3.5rem;
+	    }
+	}
+	@media screen and (min-width: 576px){
+	    .ps-sm-6, .px-sm-6 {
+	        padding-left: 3.5rem;
+	    }
+	}
+	.pe-1-9, .px-1-9 {
+	    padding-right: 1.9rem;
+	}
+	.ps-1-9, .px-1-9 {
+	    padding-left: 1.9rem;
+	}
+	.pb-1-9, .py-1-9 {
+	    padding-bottom: 1.9rem;
+	}
+	.pt-1-9, .py-1-9 {
+	    padding-top: 1.9rem;
+	}
+	.mb-1-9, .my-1-9 {
+	    margin-bottom: 1.9rem;
+	}
+	@media (min-width: 992px){
+	    .d-lg-inline-block {
+	        display: inline-block!important;
+	    }
+	}
+	.rounded {
+	    border-radius: 0.25rem!important;
+	}
+	.coltxt{
+		color:#fff;
+	}
+	.mg-l{
+		margin-left:1rem;
+	}
+</style>
+</head>
+<body class="body gradient-custom" style="color:#000000">
+	<nav style="background-color:#33475b;" class="navbar">
+		 <div class="container-fluid">
+		 	<div>
+			 	<a class="navbar-brand nav-link font-weight-bold coltxt" th:href="@{/}">Home <span class="sr-only">(current)</span></a>
+		 	</div>
+		 	<form class="d-flex" th:action="@{/logout}" method="post">
+		       <button class="float-right btn btn-primary btn-lg font-weight-bold" type="submit">Log Out</button>
+		    </form>
+		 </div>
+		</nav>
+	<section class="bg-light">
+	    <div class="container">
+	        <div class="row">
+	            <div class="col-lg-12 mb-4 mb-sm-5">
+	                <div class="card card-style1 border-0">
+	                    <div class="card-body p-1-9 p-sm-2-3 p-md-6 p-lg-7">
+	                        <div class="row align-items-center">
+	                            <div class="col-lg-6 mb-4 mb-lg-0">
+	                                <img src="https://bootdey.com/img/Content/avatar/avatar7.png" alt="...">
+	                            </div>
+	                            <div class="col-lg-6 px-xl-10">
+	                                <div class="bg-secondary d-lg-inline-block py-1-9 px-1-9 px-sm-6 mb-1-9 rounded">
+	                                    <h3 class="h2 text-white mb-0" th:text="${profile.firstName} + ' ' + ${profile.lastName}">User Name</h3>
+	                                    <span class="">
+											<a  href="NewProfile.html" th:href="@{/add/profile}" >
+												<button class="  btn btn-primary btn-sm font-weight-bold" type="submit">Update Profile</button>	
+											</a>
+										</span>
+	                                    <span class="mg-l">
+											<a  href="NewProfile.html" th:href="@{/add/workexperience}" >
+												<button class="btn btn-primary btn-sm font-weight-bold" type="submit">Add Work Experience</button>	
+											</a>
+										</span>
+	                                </div>
+	                                <ul class="list-unstyled mb-1-9">
+	                                    <li class="mb-2 mb-xl-3 display-28" th:if="${profile.jobtitle1}"><span class="display-26 text-secondary me-2 font-weight-600">Position1:</span> <span th:text="${profile.jobtitle1}"></span></li>
+	                                    <li class="mb-2 mb-xl-3 display-28" th:if="${profile.jobtitle2}"><span class="display-26 text-secondary me-2 font-weight-600">Position2:</span> <span th:text="${profile.jobtitle2}"></span></li>
+	                                    <li class="mb-2 mb-xl-3 display-28" th:if="${profile.jobtitle3}"><span class="display-26 text-secondary me-2 font-weight-600">Position3:</span> <span th:text="${profile.jobtitle3}"></span></li>
+	                                    <li class="mb-2 mb-xl-3 display-28" ><span class="display-26 text-secondary me-2 font-weight-600" >Email:</span > <span th:text="${profile.email}"></span></li>
+	                                    <li class="display-28" th:if="${profile.phone1}"><span class="display-26 text-secondary me-2 font-weight-600">Phone1:</span> <span th:text="${profile.phone1}"></span></li>
+	                                    <li class="display-28" th:if="${profile.phone2}"><span class="display-26 text-secondary me-2 font-weight-600">Phone2:</span> <span th:text="${profile.phone2}"></span></li>
+	                                    <li class="display-28" th:if="${profile.phone3}"><span class="display-26 text-secondary me-2 font-weight-600">Phone3:</span> <span th:text="${profile.phone3}"></span></li>
+	                                </ul>
+	                                <ul class="social-icon-style1 list-unstyled mb-0 ps-0">
+	                                    <li><a href="#!"><i class="ti-twitter-alt"></i></a></li>
+	                                    <li><a href="#!"><i class="ti-facebook"></i></a></li>
+	                                    <li><a href="#!"><i class="ti-pinterest"></i></a></li>
+	                                    <li><a href="#!"><i class="ti-instagram"></i></a></li>
+	                                </ul>
+	                            </div>
+	                        </div>
+	                    </div>
+	                </div>
+	            </div>
+	            <div class="col-lg-12 mb-4 mb-sm-5">
+	                <div>
+	                    <span class="section-title text-primary mb-3 mb-sm-4">About Me</span>
+	                    <p th:text="${profile.biography}"></p>
+	               </div>
+	            </div>
+	            <div class="col-lg-12">
+	                <div class="row">
+	                    <div class="col-lg-12 mb-5 mb-sm-6">
+	                        <div class="mb-5 mb-sm-6">
+	                            <span class="section-title text-primary mb-3 mb-sm-4">Skills</span>
+	                            <div class="progress-text">
+	                                <div class="row">
+	                                    <div class="col-6" th:text="${profile.skill1}">Skill1</div>
+	                                </div>
+	                            </div>
+	                            <div th:if="${profile.skill1}"  class="custom-progress progress progress-medium mb-3" style="height: 4px;">
+	                                <div class="animated custom-bar progress-bar slideInLeft bg-secondary" style="width:100%" aria-valuemax="100" aria-valuemin="0" aria-valuenow="10" role="progressbar"></div>
+	                            </div>
+	                            <div  class="progress-text">
+	                                <div class="row">
+	                                    <div class="col-6" th:text="${profile.skill2}">Skill2</div>
+	                                </div>
+	                            </div>
+	                            <div th:if="${profile.skill2}" class="custom-progress progress progress-medium mb-3" style="height: 4px;">
+	                                <div class="animated custom-bar progress-bar slideInLeft bg-secondary" style="width:100%" aria-valuemax="100" aria-valuemin="0" aria-valuenow="70" role="progressbar"></div>
+	                            </div>
+	                            <div class="progress-text">
+	                                <div class="row">
+	                                    <div class="col-6" th:text="${profile.skill3}">Skill3</div>
+	                                </div>
+	                            </div>
+	                            <div th:if="${profile.skill3}" class="custom-progress progress progress-medium mb-3" style="height: 4px;">
+	                                <div class="animated custom-bar progress-bar slideInLeft bg-secondary" style="width:100%" aria-valuemax="100" aria-valuemin="0" aria-valuenow="70" role="progressbar"></div>
+	                            </div>
+	                            <div class="progress-text">
+	                                <div class="row">
+	                                    <div class="col-6" th:text="${profile.skill4}">Skill 4</div>
+	                                </div>
+	                            </div>
+	                            <div th:if="${profile.skill4}" class="custom-progress progress progress-medium" style="height: 4px;">
+	                                <div class="animated custom-bar progress-bar slideInLeft bg-secondary" style="width:100%" aria-valuemax="100" aria-valuemin="0" aria-valuenow="70" role="progressbar"></div>
+	                            </div>
+	                        </div>
+	                        <div>
+	                            <span class="section-title text-primary mb-3 mb-sm-4">Work Experiences</span>
+	                            	<table class="table body-white">
+									  <thead class="thead-dark">
+									    <tr>
+									      <th scope="col">Title</th>
+									      <th scope="col">Employment Type</th>
+									      <th scope="col">Company Name</th>
+									      <th scope="col">Position</th>
+									      <th scope="col">Work Description</th>
+									      <th scope="col">Start Month</th>
+									      <th scope="col">Start Year</th>
+									      <th scope="col">End Month</th>
+									      <th scope="col">End Year</th>
+									      <th scope="col">City</th>
+									      <th scope="col">State</th>
+									      <th scope="col">ZipCode</th>
+									    </tr>
+									  </thead>
+									  <tbody>
+									    <tr th:each="experience : ${workExperiences}">
+							
+									          <th th:text="${experience.title}" scope="row"></th>
+										      <td th:text="${experience.type}"></td>
+										      <td th:text="${experience.companyName}"></td>
+										      <td th:text="${experience.position}"></td>
+										      <td th:text="${experience.description}"></td>
+										      <td th:text="${experience.startMonth}"></td>
+										      <td th:text="${experience.startYear}"></td>
+										      <td th:text="${experience.endMonth}"></td>
+										      <td th:text="${experience.endYear}"></td>
+										      <td th:text="${experience.city}"></td>
+										      <td th:text="${experience.state}"></td>
+										      <td th:text="${experience.zipcode}"></td>
+
+									    </tr>
+									  </tbody>
+								</table>
+	                        </div>
+	                    </div>
+	                </div>
+	            </div>
+	        </div>
+	    </div>
+	</section>
+</body>
+</html>

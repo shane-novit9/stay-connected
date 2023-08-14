@@ -1,0 +1,3 @@
+INSERT INTO "authorities" VALUES ('STUDENT');
+INSERT INTO "authorities" VALUES ('ALUMNI');
+INSERT INTO "authorities" VALUES ('FACULTY');
